@@ -22,7 +22,6 @@ import chromadb
 from dotenv import load_dotenv
 
 
-#TODO: commentare blocco alla linea 300 prima della seconda esecuizione
 nest_asyncio.apply()
 load_dotenv()
 os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
@@ -31,6 +30,7 @@ os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CL
 data_dir = "iclr_docs"
 
 
+#TODO: retireve automatico dei nomi dei file da dentro la cartella
 papers = [
 "NewIDP2.docx"
 ]
@@ -48,7 +48,7 @@ parser = LlamaParse(result_type=ResultType.MD)
 for paper_path in papers:
     paper_base = Path(paper_path).stem
     full_paper_path = str(Path(data_dir) / paper_path)
-    md_json_objs = parser.get_json_result("C:\\Users\\s.cavallaro\\Documents\\GitHub\\RAG_Agent\\Rag_Agent\\iclr_docs\\NewIDP2.docx")
+    md_json_objs = parser.get_json_result("C:\\Users\\s.cavallaro\\Documents\\GitHub\\RAG_Agent\\Vector_rag_agent\\iclr_docs\\NewIDP2.docx")
     # relative_path = os.path.join("iclr_docs", paper_path)
     # md_json_objs = parser.get_json_result(relative_path)
     json_dicts = md_json_objs[0]["pages"]

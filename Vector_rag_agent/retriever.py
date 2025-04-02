@@ -13,7 +13,6 @@ from llama_index.core import VectorStoreIndex
 from llama_index.core.schema import NodeWithScore
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
-from llama_index.core.vector_stores.types import VectorStoreQuerySpec
 from typing import List
 from dotenv import load_dotenv
 import os
@@ -32,8 +31,6 @@ vector_store = ChromaVectorStore.from_params(
     collection_name="text_nodes", persist_dir=persist_dir
 )
 index = VectorStoreIndex.from_vector_store(vector_store,embed_model=embed_model)
-
-
 
 
 Settings.embed_model = embed_model
@@ -64,9 +61,9 @@ def section_retrieve(query: str, verbose: bool = False) -> List[NodeWithScore]:
             condition=FilterCondition.AND,
         )
 
-        # section_nodes_raw = index.vector_store.get_nodes(node_ids=None, filters=filters)
-        query_spec = VectorStoreQuery(filters=filters)
-        result = index.vector_store.query(query_spec)
+
+        query_obj = VectorStoreQuery(filters=filters)
+        result = index.vector_store.query(query_obj)
         section_nodes_raw = result.nodes
         section_nodes = [NodeWithScore(node=n) for n in section_nodes_raw]
         # order and consolidate nodes
@@ -102,14 +99,19 @@ response = query_engine.query(
 print(str(response))
 
 
-for n in response.source_nodes:
-    print(n.metadata)
+# for n in response.source_nodes:
+#     print(n.metadata)
 
 response = query_engine.query(
-    "Parlami dei flussi Flussi pre-login del nuovo IDP"
+    "Parlami dei flussi pre-login del nuovo IDP"
 )
 print(str(response))
 
+
+response = query_engine.query(
+    "Quali lambda triggers sono utilizzati e a cosa servono"
+)
+print(str(response))
 
 
 
