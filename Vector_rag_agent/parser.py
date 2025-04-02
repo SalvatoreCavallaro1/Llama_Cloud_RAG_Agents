@@ -27,13 +27,11 @@ load_dotenv()
 os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
 os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CLOUD_API_KEY")).decode('utf-8')
 
-data_dir = "iclr_docs"
+BASE_DIR = Path(__file__).resolve().parent
 
+ICLR_DOCS_DIR = BASE_DIR / "iclr_docs"
 
-#TODO: retireve automatico dei nomi dei file da dentro la cartella
-papers = [
-"NewIDP2.docx"
-]
+papers = [file for file in os.listdir(ICLR_DOCS_DIR) if os.path.isfile(os.path.join(ICLR_DOCS_DIR, file))]
 
 embed_model = OpenAIEmbedding(model="text-embedding-3-large")
 llm = OpenAI(model="gpt-4o")
@@ -47,13 +45,11 @@ parser = LlamaParse(result_type=ResultType.MD)
 
 for paper_path in papers:
     paper_base = Path(paper_path).stem
-    full_paper_path = str(Path(data_dir) / paper_path)
-    md_json_objs = parser.get_json_result("Il tuo percorso assoluto qui")
-    # relative_path = os.path.join("iclr_docs", paper_path)
-    # md_json_objs = parser.get_json_result(relative_path)
+    relative_path = ICLR_DOCS_DIR / paper_path
+    md_json_objs = parser.get_json_result(str(relative_path))
     json_dicts = md_json_objs[0]["pages"]
     paper_dicts[paper_path] = {
-        "paper_path": full_paper_path,
+        "paper_path": str(relative_path),
         "json_dicts": json_dicts,
     }
 
