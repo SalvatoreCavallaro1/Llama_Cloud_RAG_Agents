@@ -1,0 +1,6 @@
+.venv
+./storage_chroma/**
+./Rag_Agent/**.docx
+./Rag_Agent/**.pdf
+./iclr_text_nodes.pkl
+./sections_dict.pkl
