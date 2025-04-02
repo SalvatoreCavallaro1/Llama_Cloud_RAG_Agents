@@ -48,7 +48,7 @@ parser = LlamaParse(result_type=ResultType.MD)
 for paper_path in papers:
     paper_base = Path(paper_path).stem
     full_paper_path = str(Path(data_dir) / paper_path)
-    md_json_objs = parser.get_json_result("C:\\Users\\s.cavallaro\\Documents\\GitHub\\RAG_Agent\\Vector_rag_agent\\iclr_docs\\NewIDP2.docx")
+    md_json_objs = parser.get_json_result("Il tuo percorso assoluto qui")
     # relative_path = os.path.join("iclr_docs", paper_path)
     # md_json_objs = parser.get_json_result(relative_path)
     json_dicts = md_json_objs[0]["pages"]
