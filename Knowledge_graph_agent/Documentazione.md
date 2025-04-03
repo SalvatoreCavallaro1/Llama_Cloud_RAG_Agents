@@ -69,7 +69,7 @@ eseguire dentro la directory neo4j il comando:
 docker compose up 
 ```
 
-verra installato un database neo4j in locale, per accedere al database puoi andare su [localhost:7474](http://localhost:7474)
+verra instanziato un docker contsiner di neo4j in locale, per accedere al container puoi andare su [localhost:7474](http://localhost:7474)
 al primo accesso inserire le credenziali di default:
 ```bash
 username: neo4j
@@ -79,7 +79,7 @@ e successivamente ti verrà chiesto di cambiare la password, inserire come passw
 ```bash 
 password: llamaindex
 ```
-oppure una password a piacere, ma ricordati di cambiarla anche nel file `settings.py` alla riga 12:
+oppure una password a piacere, ma ricordati di cambiarla anche nel file `settings.py`:
 
 ### Preparazione dei dati
 
