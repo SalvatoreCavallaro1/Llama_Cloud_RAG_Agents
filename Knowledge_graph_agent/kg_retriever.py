@@ -8,7 +8,6 @@ from llama_index.core.indices.property_graph import (
     ImplicitPathExtractor,
     SimpleLLMPathExtractor,
 )
-from llama_index.core import VectorStoreIndex
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import BaseRetriever
@@ -122,4 +121,5 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 agent = agent_worker.as_agent()
 
 ##### Agent test #####
-response = agent.chat("Dammi tutti requisiti funzionali di IDP")
+# response = agent.chat("Come posso risolvere un ticket dove il problema è un utente che non riceve OTP per IDP?")
+response = agent.chat("Come faccio a chiudere un ticket?")

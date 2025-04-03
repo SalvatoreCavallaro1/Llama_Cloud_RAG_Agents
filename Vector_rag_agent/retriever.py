@@ -99,19 +99,7 @@ response = query_engine.query(
 print(str(response))
 
 
-# for n in response.source_nodes:
-#     print(n.metadata)
 
-response = query_engine.query(
-    "Parlami dei flussi pre-login del nuovo IDP"
-)
-print(str(response))
-
-
-response = query_engine.query(
-    "Quali lambda triggers sono utilizzati e a cosa servono"
-)
-print(str(response))
 
 
 
