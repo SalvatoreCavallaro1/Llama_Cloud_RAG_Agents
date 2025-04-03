@@ -76,11 +76,6 @@ storage_chroma
 ### Effeturare il retrieve delle informazioni
 
 Eseguire il file retriever.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
-```python
-response = query_engine.query(
-    "la tua domanda qui"
-)
-print(str(response))
 
 ```
 
