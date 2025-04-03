@@ -31,10 +31,7 @@ In sintesi, il **Dynamic Section Retrieval** di LlamaIndex offre un migliorament
 
 Installare le dipendenze con:
 ```bash
-pip install llama_index
-pip install llama-index-core
-pip install llama-cloud-services
-pip install llama-index-vector-stores-chroma
+pip install -r requirements.txt
 ```
 
 Per utilizzare chroma come database, installare anche: Microsoft C++ Build Tools
@@ -73,9 +70,9 @@ storage_chroma
 
 
 
-### Effeturare il retrieve delle informazioni
+### Testare l'agente
 
-Eseguire il file retriever.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
+Eseguire il file agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
 
 ```
 

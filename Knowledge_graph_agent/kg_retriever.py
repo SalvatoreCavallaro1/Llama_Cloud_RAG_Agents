@@ -1,7 +1,5 @@
 from llama_index.core.indices.property_graph import VectorContextRetriever
 from llama_index.core import PropertyGraphIndex, StorageContext, load_index_from_storage
-from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core.indices.property_graph import (
     ImplicitPathExtractor,
     SimpleLLMPathExtractor,
@@ -9,8 +7,6 @@ from llama_index.core.indices.property_graph import (
 from llama_index.core.schema import NodeWithScore
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import BaseRetriever
-from llama_index.core.tools import QueryEngineTool, ToolMetadata
-from llama_index.core.agent import FunctionCallingAgentWorker
 from typing import List
 from settings import *
 
@@ -71,28 +67,3 @@ class CustomRetriever(BaseRetriever):
 
 
 custom_retriever = CustomRetriever(kg_retriever, base_retriever)
-
-
-
-################### Build Agent ######################
-
-kg_query_engine = RetrieverQueryEngine(custom_retriever)
-kg_query_tool = QueryEngineTool(
-    query_engine=kg_query_engine,
-    metadata=ToolMetadata(
-        name="query_tool",
-        description="Provides information about the New IDP",
-    ),
-)
-
-agent_worker = FunctionCallingAgentWorker.from_tools(
-    [kg_query_tool],
-    llm=llm,
-    verbose=True,
-    allow_parallel_tool_calls=False,
-)
-agent = agent_worker.as_agent()
-
-##### Agent test #####
-response = agent.chat("domanda")
-

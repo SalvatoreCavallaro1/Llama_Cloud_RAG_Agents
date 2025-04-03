@@ -57,13 +57,7 @@ L'agente opera seguendo quattro fasi principali:
 
 ### Installare le dipendenze con:
 ```bash
-pip install llama-index
-pip install llama-index-core==0.10.42
-pip install llama-index-embeddings-openai
-pip install llama-index-postprocessor-flag-embedding-reranker
-pip install git+https://github.com/FlagOpen/FlagEmbedding.git
-pip install llama-index-graph-stores-neo4j
-pip install llama-cloud-services
+pip install -r requirements.txt
 ```
 
 ### Configurazione neo4j
@@ -85,6 +79,8 @@ e successivamente ti verrà chiesto di cambiare la password, inserire come passw
 ```bash 
 password: llamaindex
 ```
+oppure una password a piacere, ma ricordati di cambiarla anche nel file `settings.py` alla riga 12:
+
 ### Preparazione dei dati
 
 #### Caricamento dei documenti
@@ -110,9 +106,9 @@ SE DEVE ESSERE GENERATO UN NUOVO INDICE ELIMINARE PRIMA TUTTO QUELLO CHE SI HA D
 storage
 ```
 
-### Effeturare il retrieve delle informazioni
+### Testare l'agente
 
-Eseguire il file retriever.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
+Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
 
 
 

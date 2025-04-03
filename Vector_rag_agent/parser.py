@@ -123,7 +123,7 @@ class ValidSections(BaseModel):
         "List of valid section indexes. Do NOT include sections to remove."
     )
 
-##########Extract into Section Outputs#########
+########## Extract into Section Outputs #########
 
 async def aget_sections(
         doc_text: str, llm: Optional[LLM] = None
