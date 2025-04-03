@@ -2,8 +2,6 @@ from llama_index.core.indices.property_graph import VectorContextRetriever
 from llama_index.core import PropertyGraphIndex, StorageContext, load_index_from_storage
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.core import Settings
-from llama_index.graph_stores.neo4j import Neo4jPGStore
 from llama_index.core.indices.property_graph import (
     ImplicitPathExtractor,
     SimpleLLMPathExtractor,
@@ -13,33 +11,8 @@ from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import BaseRetriever
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import FunctionCallingAgentWorker
-from dotenv import load_dotenv
 from typing import List
-import base64
-import os
-
-load_dotenv()
-os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
-os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CLOUD_API_KEY")).decode('utf-8')
-
-#################### Setup Model ######################
-
-llm = OpenAI(model="gpt-4o")
-embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-
-Settings.llm = llm
-Settings.embed_model = embed_model
-
-####################### Setup Kg Store ######################
-
-graph_store = Neo4jPGStore(
-    username="neo4j",
-    password="llamaindex",
-    url="bolt://localhost:7687",
-)
-vec_store = None
-
-
+from settings import *
 
 
 index = PropertyGraphIndex.from_existing(
@@ -121,5 +94,5 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 agent = agent_worker.as_agent()
 
 ##### Agent test #####
-# response = agent.chat("Come posso risolvere un ticket dove il problema è un utente che non riceve OTP per IDP?")
-response = agent.chat("Come faccio a chiudere un ticket?")
+response = agent.chat("domanda")
+

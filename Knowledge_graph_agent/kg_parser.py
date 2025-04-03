@@ -1,9 +1,9 @@
 from llama_cloud_services.parse import ResultType
 from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.core import Settings, PropertyGraphIndex, StorageContext
+from llama_index.core import PropertyGraphIndex, StorageContext
 from llama_cloud_services import LlamaParse
-from llama_index.core.schema import TextNode, Document
+from llama_index.core.schema import Document
 from llama_index.core import VectorStoreIndex
 from llama_index.graph_stores.neo4j import Neo4jPGStore
 from llama_index.core.indices.property_graph import (
@@ -11,24 +11,11 @@ from llama_index.core.indices.property_graph import (
     SimpleLLMPathExtractor,
 )
 import nest_asyncio
-nest_asyncio.apply()
-import os
 from copy import deepcopy
 from pathlib import Path
-from dotenv import load_dotenv
-import base64
+from settings import *
 
-load_dotenv()
-os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
-os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CLOUD_API_KEY")).decode('utf-8')
-
-#################### Setup Model ######################
-
-llm = OpenAI(model="gpt-4o")
-embed_model = OpenAIEmbedding(model="text-embedding-3-small")
-
-Settings.llm = llm
-Settings.embed_model = embed_model
+nest_asyncio.apply()
 
 ###################### Parse Data ######################
 
@@ -41,15 +28,6 @@ file="NewIDP2.docx"
 
 docs = LlamaParse(result_type=ResultType.TXT).load_data(os.path.join(DOCS, file))
 
-
-####################### Setup Kg Store ######################
-
-graph_store = Neo4jPGStore(
-    username="neo4j",
-    password="llamaindex",
-    url="bolt://localhost:7687",
-)
-vec_store = None
 
 ################# Split docs into pages ################
 

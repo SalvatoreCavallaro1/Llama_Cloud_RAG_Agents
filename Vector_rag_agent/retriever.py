@@ -1,8 +1,4 @@
-from llama_index.llms.openai import OpenAI
 from llama_index.core.vector_stores.types import (
-    VectorStoreInfo,
-    VectorStoreQuerySpec,
-    MetadataInfo,
     MetadataFilters,
     FilterCondition, VectorStoreQuery,
 )
@@ -11,32 +7,17 @@ from llama_index.core.response_synthesizers import TreeSummarize, BaseSynthesize
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.core import VectorStoreIndex
 from llama_index.core.schema import NodeWithScore
-from llama_index.embeddings.openai import OpenAIEmbedding
-from llama_index.core import Settings
 from llama_index.core.tools import QueryEngineTool, ToolMetadata
 from llama_index.core.agent import FunctionCallingAgentWorker
 from typing import List
-from dotenv import load_dotenv
-import os
-import base64
+from settings import *
+
 #################################################RETIEVER ######################################################
-
-load_dotenv()
-os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
-os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CLOUD_API_KEY")).decode('utf-8')
-
-persist_dir = "storage_chroma"
-llm = OpenAI(model="gpt-4o")
-embed_model = OpenAIEmbedding(model="text-embedding-3-large")
 
 vector_store = ChromaVectorStore.from_params(
     collection_name="text_nodes", persist_dir=persist_dir
 )
 index = VectorStoreIndex.from_vector_store(vector_store,embed_model=embed_model)
-
-
-Settings.embed_model = embed_model
-Settings.llm = llm
 
 chunk_retriever = index.as_retriever(similarity_top_k=3)
 
@@ -94,13 +75,6 @@ class SectionRetrieverRAGEngine(CustomQueryEngine):
 
 query_engine = SectionRetrieverRAGEngine()
 
-
-# response = query_engine.query(
-#     "Come faccio a chiudere un ticket?"
-# )
-# print(str(response))
-
-
 ################### Build Agent ######################
 
 
@@ -121,10 +95,7 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 agent = agent_worker.as_agent()
 
 ##### Agent test #####
-# response = agent.chat("Come posso risolvere un ticket dove il problema è un utente che non riceve OTP per IDP?")
-response = agent.chat("Come faccio a chiudere un ticket?")
-
-
+response = agent.chat("domanda")
 
 
 

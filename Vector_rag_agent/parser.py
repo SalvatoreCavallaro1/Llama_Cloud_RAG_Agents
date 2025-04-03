@@ -1,8 +1,5 @@
 import nest_asyncio
 from llama_cloud_services.parse import ResultType
-from llama_index.core import Settings
-from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_cloud_services import LlamaParse
 from llama_index.core.schema import TextNode
 from llama_index.core.prompts import ChatPromptTemplate, ChatMessage
@@ -13,31 +10,19 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 from typing import List, Optional
 from pydantic import BaseModel, Field
 from pathlib import Path
-import base64
-import os
 import re
 import json
 import pickle
 import chromadb
-from dotenv import load_dotenv
-
+from settings import *
 
 nest_asyncio.apply()
-load_dotenv()
-os.environ['OPENAI_API_KEY'] = base64.urlsafe_b64decode(os.getenv("OPENAI_API_KEY")).decode('utf-8')
-os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CLOUD_API_KEY")).decode('utf-8')
 
 BASE_DIR = Path(__file__).resolve().parent
 
 ICLR_DOCS_DIR = BASE_DIR / "iclr_docs"
 
 papers = [file for file in os.listdir(ICLR_DOCS_DIR) if os.path.isfile(os.path.join(ICLR_DOCS_DIR, file))]
-
-embed_model = OpenAIEmbedding(model="text-embedding-3-large")
-llm = OpenAI(model="gpt-4o")
-
-Settings.embed_model = embed_model
-Settings.llm = llm
 
 paper_dicts = {}
 
