@@ -114,5 +114,5 @@ Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambi
 
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
-- [Chroma Documentation](https://www.trychroma.com/docs/)
+- [Neo4j Documentation]([https://www.trychroma.com/docs/](https://neo4j.com/docs/))
 - [Tutorial seguito](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/knowledge_graphs/kg_agent.ipynb)
