@@ -53,9 +53,6 @@ for paper_path in papers:
         "json_dicts": json_dicts,
     }
 
-# NOTE: these are utility functions to sort the dumped images by the page number
-# (they are formatted like "{uuid}-{page_num}.jpg"
-
 def get_page_number(file_name):
     match = re.search(r"-page-(\d+)\.jpg$", str(file_name))
     if match:
@@ -303,11 +300,9 @@ vector_store = ChromaVectorStore.from_params(
 index = VectorStoreIndex.from_vector_store(vector_store,embed_model=embed_model)
 
 ###################################
-# Don't run the block below if you've already inserted the nodes. Only run if it's your first time!!
+# Don't run the block below if you've already inserted the nodes. Only run if it's your first time or delete the index.
 ################################
 index.insert_nodes(all_text_nodes)
-
-##############################################
 
 
 
