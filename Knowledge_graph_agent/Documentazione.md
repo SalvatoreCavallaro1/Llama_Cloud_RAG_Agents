@@ -69,7 +69,7 @@ eseguire dentro la directory neo4j il comando:
 docker compose up 
 ```
 
-verra installato un database neo4j in locale, per accedere al database puoi andare su [localhost:7474](http://localhost:7474)
+verra instanziato un docker contsiner di neo4j in locale, per accedere al container puoi andare su [localhost:7474](http://localhost:7474)
 al primo accesso inserire le credenziali di default:
 ```bash
 username: neo4j
@@ -79,7 +79,7 @@ e successivamente ti verrà chiesto di cambiare la password, inserire come passw
 ```bash 
 password: llamaindex
 ```
-oppure una password a piacere, ma ricordati di cambiarla anche nel file `settings.py` alla riga 12:
+oppure una password a piacere, ma ricordati di cambiarla anche nel file `settings.py`:
 
 ### Preparazione dei dati
 
@@ -120,6 +120,6 @@ Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambi
 
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
-- [Chroma Documentation](https://www.trychroma.com/docs/)
+- [Neo4j Documentation](https://neo4j.com/docs/)
 - [Tutorial seguito](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/knowledge_graphs/kg_agent.ipynb)
 - [Llamatrace](https://phoenix.arize.com/llamatrace/)
