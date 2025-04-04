@@ -14,7 +14,7 @@ os.environ['LLAMA_CLOUD_API_KEY'] = base64.urlsafe_b64decode(os.getenv("LLAMA_CL
 ##### Setup tracing #####
 
 tracer_provider = register(
-  project_name="kg_agent",
+  project_name="vector_agent",
   endpoint="https://app.phoenix.arize.com/v1/traces"
 )
 
