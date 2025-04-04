@@ -24,4 +24,4 @@ agent_worker = FunctionCallingAgentWorker.from_tools(
 agent = agent_worker.as_agent()
 
 ##### Agent test #####
-response = agent.chat("domanda")
+response = agent.chat("Requisiti funzionali IDP")

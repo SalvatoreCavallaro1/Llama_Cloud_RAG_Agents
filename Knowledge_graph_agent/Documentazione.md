@@ -95,6 +95,13 @@ OPENAI_API_KEY=
 LLAMA_CLOUD_API_KEY=
 ```
 
+Se si vuole utilizzare Llamatrace per il tracing delle chiamate API, è necessario aggiungere anche la chiave di tracciamento:
+```dotenv
+OTEL_EXPORTER_OTLP_HEADERS=
+PHOENIX_CLIENT_HEADERS=
+PHOENIX_COLLECTOR_ENDPOINT=
+```
+
 ## Utilizzo
 
 ### Creazione del grafo e dell'indice vettoriale
@@ -111,8 +118,8 @@ storage
 Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
 
 
-
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
 - [Chroma Documentation](https://www.trychroma.com/docs/)
 - [Tutorial seguito](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/knowledge_graphs/kg_agent.ipynb)
+- [Llamatrace](https://phoenix.arize.com/llamatrace/)

@@ -56,6 +56,12 @@ OPENAI_API_KEY=
 LLAMA_CLOUD_API_KEY=
 ```
 
+Se si vuole utilizzare Llamatrace per il tracing delle chiamate API, è necessario aggiungere anche la chiave di tracciamento:
+```dotenv
+OTEL_EXPORTER_OTLP_HEADERS=
+PHOENIX_CLIENT_HEADERS=
+PHOENIX_COLLECTOR_ENDPOINT=
+```
 
 ## Utilizzo
 
@@ -68,13 +74,9 @@ SE DEVE ESSERE GENERATO UN NUOVO INDICE ELIMINARE PRIMA TUTTO QUELLO CHE SI HA D
 storage_chroma
 ```
 
-
-
 ### Testare l'agente
 
 Eseguire il file agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
-
-```
 
 
 ## Risultati
@@ -84,3 +86,4 @@ Il sistema recupererà sezioni dinamiche e pertinenti che rispondono in modo spe
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
 - [Chroma Documentation](https://www.trychroma.com/docs/)
 - [Tutorial seguito](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/advanced_rag/dynamic_section_retrieval.ipynb)
+- [Llamatrace](https://phoenix.arize.com/llamatrace/)**
