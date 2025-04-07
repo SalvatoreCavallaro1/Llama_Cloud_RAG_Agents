@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent
 
 DOCS = BASE_DIR / "data"
 
-file="NewIDP2.docx"
+file="Guida_utente_1.pdf"
 
 
 docs = LlamaParse(result_type=ResultType.TXT).load_data(os.path.join(DOCS, file))

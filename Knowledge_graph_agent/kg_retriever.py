@@ -30,8 +30,8 @@ index = PropertyGraphIndex.from_existing(
 kg_retriever = VectorContextRetriever(
     index.property_graph_store,
     embed_model=OpenAIEmbedding(model_name="text-embedding-3-small"),
-    similarity_top_k=2,
-    path_depth=1,
+    similarity_top_k=4,
+    path_depth=3,
     # include_text=False,
     include_text=True,
 )
@@ -41,7 +41,7 @@ kg_retriever = VectorContextRetriever(
 persist_dir = "./storage"
 storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
 base_index = load_index_from_storage(storage_context)
-base_retriever = base_index.as_retriever(similarity_top_k=2)
+base_retriever = base_index.as_retriever(similarity_top_k=4)
 base_query_engine = RetrieverQueryEngine(base_retriever)
 
 

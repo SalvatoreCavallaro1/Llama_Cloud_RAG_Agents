@@ -24,7 +24,7 @@ LlamaIndexInstrumentor().instrument(tracer_provider=tracer_provider)
 
 #################### Setup Model ######################
 
-llm = OpenAI(model="gpt-4o")
+llm = OpenAI(model="gpt-4o",temperature=0)
 embed_model = OpenAIEmbedding(model="text-embedding-3-small")
 
 Settings.llm = llm
