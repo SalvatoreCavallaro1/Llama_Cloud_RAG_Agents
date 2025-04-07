@@ -8,7 +8,7 @@ from llama_index.core.schema import NodeWithScore
 from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core.retrievers import BaseRetriever
 from typing import List
-from settings import *
+from Knowledge_graph_agent.settings import *
 
 
 index = PropertyGraphIndex.from_existing(
@@ -17,7 +17,7 @@ index = PropertyGraphIndex.from_existing(
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
-            llm=OpenAI(model="gpt-3.5-turbo", temperature=0.3),
+            llm=OpenAI(model="gpt-4o", temperature=0.2),
             num_workers=4,
             max_paths_per_chunk=10,
         ),
