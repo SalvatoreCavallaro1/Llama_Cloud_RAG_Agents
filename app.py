@@ -1,29 +1,28 @@
 import streamlit as st
 from Knowledge_graph_agent.kg_agent import agent
-################### Streamlit Interface ######################
 
-def main():
-    st.title("Agent per Content Driver")
-    st.markdown(
-        """
-        Inserisci la tua domanda riguardo il Content Driver.
-        
-        """
-    )
+st.title("💬 Chatbot")
+st.caption("🚀 Content Driver chatbot powered by LlamaIndex")
 
-    # Campo di input per l'utente
-    user_input = st.text_input("Inserisci la tua domanda:")
+# Inizializza la cronologia dei messaggi se non esiste
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "Come posso aiutarti?"}]
 
-    # Quando si clicca il pulsante "Invia", processa la domanda con l'agente
-    if st.button("Invia"):
-        if user_input.strip() != "":
-            with st.spinner("Elaborazione in corso..."):
-                # Chiamata al metodo chat del tuo agente
-                response = agent.chat(user_input).response
-            st.success("Risposta ottenuta:")
-            st.write(response)
-        else:
-            st.warning("Per favore, inserisci una domanda valida.")
+# Visualizza la cronologia della chat
+for msg in st.session_state.messages:
+    st.chat_message(msg["role"]).write(msg["content"])
 
-if __name__ == "__main__":
-    main()
+# Input del messaggio utente tramite st.chat_input
+if prompt := st.chat_input("Scrivi il tuo messaggio"):
+    # Aggiungi il messaggio dell'utente alla cronologia e visualizzalo
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.chat_message("user").write(prompt)
+
+    # Richiama il tuo agente per ottenere la risposta
+    with st.spinner("Elaborazione in corso..."):
+        # Chiamata al tuo agente (assicurati che agent.chat(prompt) restituisca un oggetto con l'attributo "response")
+        response = agent.chat(prompt).response
+
+    # Aggiungi la risposta del tuo agente alla cronologia e visualizzala
+    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.chat_message("assistant").write(response)
