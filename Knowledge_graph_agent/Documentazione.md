@@ -106,7 +106,7 @@ PHOENIX_COLLECTOR_ENDPOINT=
 
 ### Creazione del grafo e dell'indice vettoriale
 
-Eseguire il file parser.py per creare il grafo l'indice
+Eseguire il file kg_parser.py per creare il grafo e l'indice
 
 SE DEVE ESSERE GENERATO UN NUOVO INDICE ELIMINARE PRIMA TUTTO QUELLO CHE SI HA DENTRO LA DIRECTORY
 ```
