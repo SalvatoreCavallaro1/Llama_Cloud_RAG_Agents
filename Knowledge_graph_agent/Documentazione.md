@@ -117,6 +117,13 @@ storage
 
 Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
 
+### Testare l'agente da ui 
+Dalla root del progetto eseguire il comando:
+```bash
+streamlit run app.py   
+```
+
+
 
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
