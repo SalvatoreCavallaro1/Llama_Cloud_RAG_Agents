@@ -154,6 +154,13 @@ streamlit run app.py
 ```
 
 
+### Testare l'agente da ui 
+Dalla root del progetto eseguire il comando:
+```bash
+streamlit run app.py   
+```
+
+
 
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
