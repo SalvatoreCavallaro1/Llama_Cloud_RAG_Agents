@@ -14,6 +14,9 @@ import nest_asyncio
 from copy import deepcopy
 from pathlib import Path
 from settings import *
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 nest_asyncio.apply()
 
@@ -23,10 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent
 
 DOCS = BASE_DIR / "data"
 
-file="Guida_utente_1.pdf"
+# Inizializza una lista vuota per raccogliere tutti i documenti
+docs = []
 
 
-docs = LlamaParse(result_type=ResultType.TXT).load_data(os.path.join(DOCS, file))
+
+# Itera su tutti i file nella directory DOCS
+for file in os.listdir(DOCS):
+    file_path = os.path.join(DOCS, file)
+    docs.extend(LlamaParse(result_type=ResultType.TXT).load_data(file_path))
 
 
 ################# Split docs into pages ################
@@ -65,11 +73,11 @@ base_index.storage_context.persist()
 
 index = PropertyGraphIndex.from_documents(
     sub_docs,
-    embed_model=OpenAIEmbedding(model_name="text-embedding-3-small"),
+    embed_model=OpenAIEmbedding(model_name="text-embedding-3-large"),
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
-            llm=OpenAI(model="gpt-3.5-turbo", temperature=0.3),
+            llm=OpenAI(model="gpt-4o", temperature=0.1),
             num_workers=4,
             max_paths_per_chunk=10,
         ),

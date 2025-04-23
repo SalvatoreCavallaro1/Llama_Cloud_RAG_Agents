@@ -89,7 +89,7 @@ Inserire i documenti da indicizzare nella directory 'data'. [Tipi di documenti s
 
 ### Configurazione dell'environment
 
-creare un file `.env` e inserire le chiavi API necessarie codificate in base64:
+creare un file `.env` e inserire le chiavi API necessarie:
 ```dotenv
 OPENAI_API_KEY=
 LLAMA_CLOUD_API_KEY=
@@ -102,11 +102,27 @@ PHOENIX_CLIENT_HEADERS=
 PHOENIX_COLLECTOR_ENDPOINT=
 ```
 
+Se invece non si vuole utilizzare il tracing commentare il setup del tracing nel file settings.py per disabilitarlo
+
+```python
+#### Setup tracing #####
+
+tracer_provider = register(
+  project_name="kg_agent",
+  endpoint="https://app.phoenix.arize.com/v1/traces"
+)
+
+
+LlamaIndexInstrumentor().instrument(tracer_provider=tracer_provider)
+```
+
+Se non si commenta il setup del tracing e non vengono inseriti nel file di configurazione env i valori per il tracing si avrà errore 401
+
 ## Utilizzo
 
 ### Creazione del grafo e dell'indice vettoriale
 
-Eseguire il file parser.py per creare il grafo l'indice
+Eseguire il file kg_parser.py per creare il grafo e l'indice
 
 SE DEVE ESSERE GENERATO UN NUOVO INDICE ELIMINARE PRIMA TUTTO QUELLO CHE SI HA DENTRO LA DIRECTORY
 ```
@@ -115,11 +131,31 @@ storage
 
 ### Testare l'agente
 
-Eseguire il file kg_agent.py per effettuare il retrieve delle informazioni cambiando prima al fondo del file la domanda a cui vogliamo ottenere una risposta
+1. Eseguire il server flask
+```bash
+python flask_server.py
+```
+
+2. Tramite postman o curl inviare una richiesta POST all'endpoint dell'agente. Ecco un esempio di richiesta:
+   - Endpoint: `http://localhost:5000/ask`
+   - Metodo: POST
+   - Body:
+```json
+{
+   "session_id": "1", --> id della sessione da cambiare per ogni nuova conversazione
+  "query": "La tua domanda"
+}
+```
+
+### Testare l'agente da ui 
+Dalla root del progetto eseguire il comando:
+```bash
+streamlit run app.py   
+```
+
 
 
 ## Approfondimenti
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/)
 - [Neo4j Documentation](https://neo4j.com/docs/)
-- [Tutorial seguito](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/knowledge_graphs/kg_agent.ipynb)
 - [Llamatrace](https://phoenix.arize.com/llamatrace/)
