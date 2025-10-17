@@ -77,7 +77,8 @@ index = PropertyGraphIndex.from_documents(
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
-            llm=OpenAI(model="gpt-4o", temperature=0.1),
+            # llm=OpenAI(model="gpt-4o", temperature=0.1),
+            llm=OpenAI(model_name=LLM_MODEL_NAME,api_base=API_BASE,api_key=API_KEY,temperature=0.1),
             num_workers=4,
             max_paths_per_chunk=10,
         ),

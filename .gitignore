@@ -4,3 +4,4 @@
 ./Rag_Agent/**.pdf
 ./iclr_text_nodes.pkl
 ./sections_dict.pkl
+.env

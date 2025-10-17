@@ -147,7 +147,7 @@ but is not actually the start of a section in the document text.
     The user will give the document text below.
 
     """
-    llm = llm or OpenAI(model="gpt-4o")
+    llm = llm or Settings.llm
     Settings.embed_model = embed_model
     Settings.llm = llm
 

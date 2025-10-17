@@ -19,7 +19,8 @@ index = PropertyGraphIndex.from_existing(
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
-            llm=OpenAI(model="gpt-4o", temperature=0.1),
+            # llm=OpenAI(model="gpt-4o", temperature=0.1),
+            llm=OpenAI(LLM_MODEL_NAME,api_base=API_BASE,api_key=API_KEY,temperature=0.1),
             num_workers=4,
             max_paths_per_chunk=10,
         ),
@@ -31,7 +32,8 @@ index = PropertyGraphIndex.from_existing(
 
 kg_retriever = VectorContextRetriever(
     index.property_graph_store,
-    embed_model=OpenAIEmbedding(model_name="text-embedding-3-large"),
+    # embed_model=OpenAIEmbedding(model_name="text-embedding-3-large"),
+    embed_model=OpenAIEmbedding(model_name=EMB_MODEL_NAME,api_base=API_BASE,api_key=API_KEY),
     similarity_top_k=5,
     path_depth=3,
     # include_text=False,
