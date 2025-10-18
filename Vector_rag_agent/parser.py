@@ -20,7 +20,7 @@ nest_asyncio.apply()
 
 BASE_DIR = Path(__file__).resolve().parent
 
-ICLR_DOCS_DIR = BASE_DIR / "iclr_docs"
+ICLR_DOCS_DIR = BASE_DIR / "docs"
 
 papers = [file for file in os.listdir(ICLR_DOCS_DIR) if os.path.isfile(os.path.join(ICLR_DOCS_DIR, file))]
 

@@ -73,14 +73,19 @@ base_index.storage_context.persist()
 
 index = PropertyGraphIndex.from_documents(
     sub_docs,
-    embed_model=OpenAIEmbedding(model_name="text-embedding-3-large"),
+    embed_model=OllamaEmbedding(model_name=EMB_MODEL_NAME,base_url=API_BASE),
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
             # llm=OpenAI(model="gpt-4o", temperature=0.1),
-            llm=OpenAI(model_name=LLM_MODEL_NAME,api_base=API_BASE,api_key=API_KEY,temperature=0.1),
-            num_workers=4,
-            max_paths_per_chunk=10,
+            llm=Ollama(model=LLM_MODEL_NAME,base_url=API_BASE, temperature=0.1,
+            request_timeout=360,
+            additional_kwargs={
+                "num_ctx": 4096,   # prova 2048 o 4096
+                "num_batch": 1     # meno memoria durante la generazione
+            }),
+            num_workers=1,
+            max_paths_per_chunk=5,
         ),
     ],
     property_graph_store=graph_store,

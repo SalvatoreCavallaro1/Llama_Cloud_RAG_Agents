@@ -2,7 +2,7 @@ import streamlit as st
 from Knowledge_graph_agent.kg_agent import agent
 
 st.title("💬 Chatbot")
-st.caption("🚀 Content Driver chatbot powered by LlamaIndex")
+st.caption("🚀 Chatbot powered by LlamaIndex")
 
 # Inizializza la cronologia dei messaggi se non esiste
 if "messages" not in st.session_state:
