@@ -15,7 +15,7 @@ load_dotenv()
 
 index = PropertyGraphIndex.from_existing(
     graph_store,
-    embed_model=OpenAIEmbedding(model=EMB_MODEL_NAME,api_base=API_BASE,api_key=API_KEY),
+    embed_model=OllamaEmbedding(model_name=EMB_MODEL_NAME,base_url=API_BASE),
     kg_extractors=[
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(

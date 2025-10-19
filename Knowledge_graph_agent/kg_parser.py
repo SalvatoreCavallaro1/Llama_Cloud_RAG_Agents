@@ -1,5 +1,5 @@
 from llama_cloud_services.parse import ResultType
-from llama_index.llms.openai import OpenAI
+# from llama_index.llms.openai import OpenAI
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import PropertyGraphIndex, StorageContext
 from llama_cloud_services import LlamaParse

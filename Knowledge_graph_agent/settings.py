@@ -1,5 +1,5 @@
-from llama_index.llms.openai import OpenAI
-from llama_index.embeddings.openai import OpenAIEmbedding
+# from llama_index.llms.openai import OpenAI
+# from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.core import Settings
 from llama_index.graph_stores.neo4j import Neo4jPGStore
 from llama_index.embeddings.ollama import OllamaEmbedding
