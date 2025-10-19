@@ -20,9 +20,12 @@ index = PropertyGraphIndex.from_existing(
         ImplicitPathExtractor(),
         SimpleLLMPathExtractor(
             # llm=OpenAI(model="gpt-4o", temperature=0.1),
-            llm=Ollama(model=LLM_MODEL_NAME,base_url=API_BASE, temperature=0.1),
-            num_workers=4,
-            max_paths_per_chunk=10,
+            llm=Ollama(model=LLM_MODEL_NAME,base_url=API_BASE, temperature=0.1,additional_kwargs={
+                "num_ctx": 4096,
+                "num_batch": 1
+            }),
+            num_workers=1,
+            max_paths_per_chunk=5,
         ),
     ],
     show_progress=True,
